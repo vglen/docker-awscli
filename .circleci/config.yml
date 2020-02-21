@@ -11,5 +11,5 @@ workflows:
           dockerfile: "Dockerfile"
           profile-name: "default"
           region: AWS_REGION
-          repo: AWS_RESOURCE_NAME_PREFIX
-          tag: "latest"
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          tag: 'latest'
