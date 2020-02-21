@@ -12,4 +12,4 @@ workflows:
           profile-name: "default"
           region: AWS_REGION
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
-          tag: "latest,${CIRCLE_BUILD_NUM}"
+          tag: "latest,2.0.0-${CIRCLE_TAG}"
