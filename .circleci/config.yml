@@ -1,0 +1,15 @@
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+version: 2.1
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          context: aws-ecr-pull-push
+          create-repo: false
+          dockerfile: "Dockerfile"
+          profile-name: "default"
+          region: AWS_REGION
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          tag: 'latest'
