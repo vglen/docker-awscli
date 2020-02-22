@@ -1,4 +1,4 @@
-FROM amazonlinux:2018.03.0.20191219.0
+FROM amazonlinux:amazonlinux:2.0.20200207.1
 
 LABEL maintainer="Glen Stummer <glen@glen.dev>"
 
