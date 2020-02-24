@@ -53,7 +53,7 @@ jobs:
 
     - name: Tag Image
       run: |
-        echo "$(cat VERSION.txt-date +"%m-%d-%Y")" > IMAGE_TAG
+        echo "$(cat VERSION.txt)-$(date +%Y%m%d%H%M%S)" > IMAGE_TAG
       shell: bash
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
