@@ -66,7 +66,7 @@ jobs:
         # be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY -t $(cat IMAGE_TAG) .
         # echo "cat ($ECR_REGISTRY/$ECR_REPOSITORY:$(cat IMAGE_TAG)) > PUBLISH"
-        docker push ($ECR_REGISTRY/$ECR_REPOSITORY:$(cat IMAGE_TAG))
+        docker push "cat ($ECR_REGISTRY/$ECR_REPOSITORY:$(cat IMAGE_TAG))"
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY -t $(cat IMAGE_TAG)"
 
 #     - name: Fill in the new image ID in the Amazon ECS task definition
