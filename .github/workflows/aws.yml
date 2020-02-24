@@ -65,7 +65,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY -t $(cat IMAGE_TAG) .
-        echo "cat ($ECR_REGISTRY/$ECR_REPOSITORY):$(cat IMAGE_TAG) < PUBLISH"
+        echo "cat ($ECR_REGISTRY/$ECR_REPOSITORY:$(cat IMAGE_TAG)) > PUBLISH"
         docker push $(cat PUBLISH)
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY -t $(cat IMAGE_TAG)"
 
