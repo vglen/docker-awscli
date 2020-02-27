@@ -34,11 +34,11 @@ workflows:
   version: 2
   lint:
     jobs:
-      - yamllint:
-          filters:
-            branches:
-              ignore:
-                - 'master'
+      # - yamllint:
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - 'master'
       - 'hadolint'
   build_and_push_image:
     jobs:
