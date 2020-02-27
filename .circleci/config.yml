@@ -2,27 +2,26 @@
 #  test
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
-  mem: circleci/rememborb@0.0.1
+  #mem: circleci/rememborb@0.0.1
+  env: christeredvartsen/persist-env@0.1.0
 version: 2.1
 jobs:
   image_tag:
-    docker:
-      - image: 'circleci/python:3.7'
+      machine: true
+      steps:
+        - env/set-env-var:
+            var-name: IMAGE_TAG
+            var-value: $(cat  VERSION.txt | tr -d '\n')
+        - env/persist-env
+
+  echo_tag:
+    machine: true
     steps:
-      - mem/remember:
-          env_var: IMAGE_TAG
-          value: $(cat  VERSION.txt | tr -d '\n')
-  yamllint:
-    docker:
-      - image: 'circleci/python:3.6.4'
-    steps:
-      - 'checkout'
+      - env/attach-env
       - run:
-          name: 'install yamllint'
-          command: 'sudo pip install yamllint'
-      - run:
-          name: 'run yamllint'
-          command: 'yamllint ./ .yamllint'
+          name: Use env var set in build job
+          command: echo $IMAGE_TAG
+
   hadolint:
     docker:
       - image: 'hadolint/hadolint:latest-debian'
@@ -43,10 +42,10 @@ workflows:
       - 'hadolint'
   build_and_push_image:
     jobs:
-      - image_tag
+      - echo_tag
       - aws-ecr/build-and-push-image:
           requires:
-            - image_tag
+            - echo_tag
           account-url: AWS_ECR_ACCOUNT_URL
           context: 'aws-ecr-pull-push'
           create-repo: false
