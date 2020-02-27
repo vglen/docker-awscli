@@ -48,7 +48,7 @@ workflows:
           requires:
             - image_tag
           account-url: AWS_ECR_ACCOUNT_URL
-          context: 'aws-ecr-push'
+          context: 'aws-ecr-pull-push'
           create-repo: false
           dockerfile: 'Dockerfile'
           profile-name: 'default'
