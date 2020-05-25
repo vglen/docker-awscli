@@ -36,9 +36,8 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: awscli
       run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
+        find . -type f | wc -l
+        sleep 30
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}} .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}}
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}}"
