@@ -8,6 +8,7 @@ name: Push to Amazon ECR
 jobs:
   deploy:
     name: build-push
+    depends: hadolint
     runs-on: ubuntu-latest
 
     steps:
@@ -41,3 +42,8 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}} .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}}
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:${{steps.vars.outputs.tag}}"
+  
+  hadolint:
+    name: 'hadolint'
+    steps:
+    uses: brpaz/hadolint-action@master
